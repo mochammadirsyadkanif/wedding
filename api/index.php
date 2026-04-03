@@ -16,33 +16,11 @@ $ca2 = $t['color_accent2']    ?? '#e8c97a';
 $ct  = $t['color_text']       ?? '#f0e6cc';
 $ov  = $t['color_overlay']    ?? 'rgba(8,12,22,0.78)';
 
-function bgSection(array $cfg, string $key, string $cp, string $cs): string {
-    $path = $cfg['backgrounds'][$key] ?? '';
-    if ($path && file_exists(__DIR__.'/'.$path))
-        return "background-image:url('".htmlspecialchars($path)."');background-size:cover;background-position:center;";
-    $gradients = [
-        'cover'     => "background:linear-gradient(160deg,{$cp} 0%,#1a0a2e 50%,{$cp} 100%);",
-        'bismillah' => "background:linear-gradient(180deg,{$cp},{$cs});",
-        'mempelai'  => "background:linear-gradient(180deg,{$cs},{$cp});",
-        'countdown' => "background:linear-gradient(180deg,{$cp},#0d1a0d);",
-        'acara'     => "background:linear-gradient(180deg,#0d1a0d,{$cp});",
-        'gallery'   => "background:linear-gradient(180deg,{$cp},{$cs});",
-        'ucapan'    => "background:linear-gradient(180deg,{$cs},{$cp});",
-        'gift'      => "background:linear-gradient(180deg,{$cp},{$cs});",
-        'footer'    => "background:{$cp};",
-    ];
-    return $gradients[$key] ?? "background:{$cp};";
-}
-
 $showGift = !empty($cfg['show_gift']);
 $rekeningAktif = array_filter($cfg['rekening'] ?? [], fn($r) => !empty($r['aktif']));
 
 // RGB breakdown helpers
-function rgb(string $hex): string {
-    $hex = ltrim($hex,'#');
-    if(strlen($hex)==3) $hex=$hex[0].$hex[0].$hex[1].$hex[1].$hex[2].$hex[2];
-    return implode(',', array_map('hexdec', [substr($hex,0,2),substr($hex,2,2),substr($hex,4,2)]));
-}
+
 $ca_rgb  = rgb($ca);
 $ct_rgb  = rgb($ct);
 ?>
