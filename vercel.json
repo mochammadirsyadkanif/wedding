@@ -1,11 +1,12 @@
 {
-  "functions": {
-    "api/*.php": {
-      "runtime": "vercel-php@0.7.1"
-    }
-  },
+  "builds": [
+    { "src": "template/*.php", "use": "vercel-php@0.7.1" },
+    { "src": "customers.php", "use": "vercel-php@0.7.1" }
+  ],
   "routes": [
-    { "src": "/(.*)\\.php", "dest": "/api/$1.php" },
-    { "src": "/", "dest": "/api/index.php" }
+    { "src": "/", "dest": "/template/index.php" },
+    { "src": "/admin", "dest": "/template/admin.php" },
+    { "src": "/ucapan", "dest": "/template/ucapan.php" },
+    { "src": "/customers", "dest": "/customers.php" }
   ]
 }
